@@ -1,4 +1,5 @@
 ﻿using IdentityServer;
+using IdentityServer.AspNetCore;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -19,7 +20,15 @@ try
     builder.ConfigureIdentityServer();
     var app = builder.Build();
     app.ConfigurePipeline();
-    
+
+    if (args.Contains("/seed"))
+    {
+        Log.Information("Seeding database...");
+        SeedData.EnsureSeedData(app);
+        Log.Information("Done seeding database. Exiting.");
+        return;
+    }
+
     app.Run();
 }
 catch (Exception ex)
