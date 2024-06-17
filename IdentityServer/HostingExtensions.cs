@@ -1,4 +1,5 @@
 using Serilog;
+using TestDuende.IdentityServer.Services;
 
 namespace IdentityServer;
 
@@ -16,7 +17,8 @@ internal static class HostingExtensions
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients);
+            .AddInMemoryClients(Config.Clients)
+            .AddCorsPolicyService<CustomCorsPolicy>();
     }
     
     public static WebApplication ConfigurePipeline(this WebApplication app)

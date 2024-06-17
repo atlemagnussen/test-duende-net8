@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TestDuende.Web.Controllers
 {
@@ -8,6 +9,7 @@ namespace TestDuende.Web.Controllers
         public string? Value { get; init; }
     }
 
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
