@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TestDuende.IdentityServer.Data;
 using TestDuende.IdentityServer.Models;
+using TestDuende.IdentityServer.Services;
 
-namespace IdentityServer;
+namespace TestDuende.IdentityServer;
 
 internal static class HostingExtensions
 {
@@ -13,8 +15,10 @@ internal static class HostingExtensions
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
 
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(connectionString));
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -31,11 +35,36 @@ internal static class HostingExtensions
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
             })
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
+            // this adds the config data from DB (clients, resources, CORS)
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = b =>
+                    b.UseSqlServer(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
+            })
+            // this adds the operational data from DB (codes, tokens, consents)
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = b =>
+                    b.UseSqlServer(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
+            })
+            //.AddInMemoryIdentityResources(Config.IdentityResources)
+            //.AddInMemoryApiScopes(Config.ApiScopes)
+            //.AddInMemoryClients(Config.Clients)
+            .AddCorsPolicyService<CustomCorsPolicy>()
             .AddAspNetIdentity<ApplicationUser>();
 
+        builder.Services.AddAuthorization(options =>
+                options.AddPolicy("admin",
+                    policy => policy.RequireClaim("sub", "1"))
+            );
+
+        builder.Services.Configure<RazorPagesOptions>(options =>
+            options.Conventions.AuthorizeFolder("/Admin", "admin"));
+
+        //builder.Services.AddTransient<IdentityServer.Ef.Pages.Portal.ClientRepository>();
+        builder.Services.AddTransient<ClientRepository>();
+        builder.Services.AddTransient<IdentityScopeRepository>();
+        builder.Services.AddTransient<ApiScopeRepository>();
         //builder.Services.AddAuthentication()
         //    .AddGoogle(options =>
         //    {

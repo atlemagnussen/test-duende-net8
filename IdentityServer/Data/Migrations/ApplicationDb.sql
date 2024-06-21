@@ -11,6 +11,7 @@ GO
 BEGIN TRANSACTION;
 GO
 
+/* copied */
 CREATE TABLE [AspNetRoles] (
     [Id] nvarchar(450) NOT NULL,
     [Name] nvarchar(256) NULL,
@@ -19,7 +20,7 @@ CREATE TABLE [AspNetRoles] (
     CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
 );
 GO
-
+/*copied*/
 CREATE TABLE [AspNetUsers] (
     [Id] nvarchar(450) NOT NULL,
     [UserName] nvarchar(256) NULL,
@@ -39,7 +40,7 @@ CREATE TABLE [AspNetUsers] (
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
 );
 GO
-
+/*copied*/
 CREATE TABLE [AspNetRoleClaims] (
     [Id] int NOT NULL IDENTITY,
     [RoleId] nvarchar(450) NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE [AspNetRoleClaims] (
     CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE
 );
 GO
-
+/*copied*/
 CREATE TABLE [AspNetUserClaims] (
     [Id] int NOT NULL IDENTITY,
     [UserId] nvarchar(450) NOT NULL,
@@ -59,7 +60,7 @@ CREATE TABLE [AspNetUserClaims] (
     CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 GO
-
+/*copied*/
 CREATE TABLE [AspNetUserLogins] (
     [LoginProvider] nvarchar(450) NOT NULL,
     [ProviderKey] nvarchar(450) NOT NULL,
@@ -69,7 +70,7 @@ CREATE TABLE [AspNetUserLogins] (
     CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 GO
-
+/*copied*/
 CREATE TABLE [AspNetUserRoles] (
     [UserId] nvarchar(450) NOT NULL,
     [RoleId] nvarchar(450) NOT NULL,
@@ -78,7 +79,7 @@ CREATE TABLE [AspNetUserRoles] (
     CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 GO
-
+/*copied*/
 CREATE TABLE [AspNetUserTokens] (
     [UserId] nvarchar(450) NOT NULL,
     [LoginProvider] nvarchar(450) NOT NULL,
@@ -88,25 +89,27 @@ CREATE TABLE [AspNetUserTokens] (
     CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 GO
-
+/*copied*/
 CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
 GO
-
+/*copied*/
 CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
 GO
-
+/*copied*/
 CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
 GO
-
+/*copied*/
 CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
 GO
 
+/*copied*/
 CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
 GO
-
+/*copied*/
 CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
 GO
 
+/*copied*/
 CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
 GO
 
