@@ -1,6 +1,6 @@
-﻿using IdentityServer;
-using IdentityServer.AspNetCore;
+﻿using IdentityServer.AspNetCore;
 using Serilog;
+using TestDuende.IdentityServer;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -18,13 +18,16 @@ try
         .ReadFrom.Configuration(ctx.Configuration));
 
     builder.ConfigureIdentityServer();
+
     var app = builder.Build();
+    
     app.ConfigurePipeline();
 
     if (args.Contains("/seed"))
     {
         Log.Information("Seeding database...");
-        SeedData.EnsureSeedData(app);
+        SeedData.EnsureSeedDataConfiguration(app);
+        SeedData.EnsureSeedDataUsers(app);
         Log.Information("Done seeding database. Exiting.");
         return;
     }
