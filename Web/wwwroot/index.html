@@ -17,12 +17,12 @@
             </p>
         </section>
 
-        <h2>Login</h2>
+        <h2>Login API user</h2>
         <div>
             <p>
                 User: <input type="text" value="client" id="client"><br>
                 Password: <input type="text" value="secret" id="secret"><br>
-                Get Token: <button type="button" id="login">Get token</button>
+                Get Token: <button type="button" id="loginClient">Get token</button>
             </p>
         </div>
         <div>
@@ -35,7 +35,14 @@
             <button type="button" id="callapi">Call API</button>
             <textarea name="data" id="data" cols="50" rows="6"></textarea>
         </div>
+        <hr>
+        <h2>Login User</h2>
+        <div>
+            <button type="button" id="loginUser">Login user</button>
+            <textarea name="user" id="user" cols="50" rows="10"></textarea>
+        </div>
     </main>
     <script type="module" src="/js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client-ts/2.0.2/browser/oidc-client-ts.js" integrity="sha512-+Yjhp8AofYSElFHSIbFMv+FHYfq1q4oyG/5z8tFnLGVgk7qLQim/JWdpPDDLvnMJ21AkLab8Rl8Rp8ShybgWlA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
