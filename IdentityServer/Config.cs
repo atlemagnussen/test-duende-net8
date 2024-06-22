@@ -18,7 +18,7 @@ public static class Config
     [
         new Client
         {
-            ClientId = "client",
+            ClientId = "apiClient",
 
             // no interactive user, use the clientid/secret for authentication
             AllowedGrantTypes = GrantTypes.ClientCredentials,
@@ -31,6 +31,20 @@ public static class Config
 
             // scopes that client has access to
             AllowedScopes = { "api1" }
-        }
+        },
+        new Client
+            {
+                ClientId = "webClient",
+                RequireClientSecret = false,
+
+                AllowedGrantTypes = GrantTypes.Code,
+
+                RedirectUris = { "http://localhost:5000/signin-oidc" },
+                FrontChannelLogoutUri = "http://localhost:5000/signout-oidc",
+                PostLogoutRedirectUris = { "http://localhost:5000/signout-callback-oidc" },
+
+                AllowOfflineAccess = true,
+                AllowedScopes = { "openid", "profile", "api1" }
+            },
     ];
 }
