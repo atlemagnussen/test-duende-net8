@@ -30,7 +30,6 @@ public class SeedData
                 context.Clients.Add(client.ToEntity());
             }
             context.SaveChanges();
-        }
         else
         {
             Log.Debug("Clients already populated");
