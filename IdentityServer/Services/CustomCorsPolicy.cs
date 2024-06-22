@@ -17,6 +17,8 @@ namespace TestDuende.IdentityServer.Services
             if (uri.Host.EndsWith("localhost", StringComparison.OrdinalIgnoreCase))
                 return Task.FromResult(true);
 
+            if (uri.Host.EndsWith("jwt.io",  StringComparison.OrdinalIgnoreCase))
+                return Task.FromResult(true);
             return Task.FromResult(false);
         }
     }

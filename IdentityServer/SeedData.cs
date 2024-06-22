@@ -6,6 +6,7 @@ using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using TestDuende.IdentityServer;
 using TestDuende.IdentityServer.Data;
 using TestDuende.IdentityServer.Models;
 

@@ -1,6 +1,7 @@
 ﻿using IdentityServer.AspNetCore;
 using Serilog;
 using TestDuende.IdentityServer;
+using TestDuende.IdentityServer.CryptoKeyStore;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -16,6 +17,8 @@ try
         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
+
+    builder.Services.AddOptionsConfiguration(builder.Configuration);
 
     builder.ConfigureIdentityServer();
 

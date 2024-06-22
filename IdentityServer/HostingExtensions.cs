@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,19 +13,24 @@ internal static class HostingExtensions
 {
     public static void ConfigureIdentityServer(this WebApplicationBuilder builder)
     {
+        var services = builder.Services;
+
+        services.AddTransient<ISigningCredentialStore, SignCredStore>();
+        services.AddTransient<IValidationKeysStore, LocalValidationKeyStore>();
+
         // uncomment if you want to add a UI
-        builder.Services.AddRazorPages();
+        services.AddRazorPages();
 
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
 
-        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        builder.Services
+        services
             .AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -53,18 +59,18 @@ internal static class HostingExtensions
             .AddCorsPolicyService<CustomCorsPolicy>()
             .AddAspNetIdentity<ApplicationUser>();
 
-        builder.Services.AddAuthorization(options =>
+        services.AddAuthorization(options =>
                 options.AddPolicy("admin",
                     policy => policy.RequireClaim("sub", "1"))
             );
 
-        builder.Services.Configure<RazorPagesOptions>(options =>
+        services.Configure<RazorPagesOptions>(options =>
             options.Conventions.AuthorizeFolder("/Admin", "admin"));
 
         //builder.Services.AddTransient<IdentityServer.Ef.Pages.Portal.ClientRepository>();
-        builder.Services.AddTransient<ClientRepository>();
-        builder.Services.AddTransient<IdentityScopeRepository>();
-        builder.Services.AddTransient<ApiScopeRepository>();
+        services.AddTransient<ClientRepository>();
+        services.AddTransient<IdentityScopeRepository>();
+        services.AddTransient<ApiScopeRepository>();
         //builder.Services.AddAuthentication()
         //    .AddGoogle(options =>
         //    {
