@@ -2,6 +2,10 @@
 
 https://duendesoftware.com/products/identityserver
 
+## localhost cert
+
+dotnet dev-certs https --trust
+
 ## EF tool
 
 dotnet tool update --global dotnet-ef

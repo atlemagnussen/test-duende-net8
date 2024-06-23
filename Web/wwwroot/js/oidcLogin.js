@@ -2,11 +2,11 @@
 const rootPath = window.location.origin
 let oicdConfig = {
     authority: "https://localhost:6001",
-    client_id: "webclient",
+    client_id: "webClient",
     redirect_uri: `${rootPath}/callback.html`,
     response_mode: "query",
     response_type: "code",
-    scope:"openid profile api.read",
+    scope:"openid profile",
     loadUserInfo: true,
     post_logout_redirect_uri: rootPath,
     userStore: new oidc.WebStorageStateStore({ store: window.sessionStorage }),
@@ -53,7 +53,7 @@ async function getUser() {
 async function getLoggedInUser() {
     const user = await manager.getUser()
     if (!user || user.expired) {
-        log("DigiLEAN auth:: no user means not logged in")
+        logDebug("DigiLEAN auth:: no user means not logged in")
         return login()
     }
     else {
@@ -68,13 +68,13 @@ function login() {
 
 // Must be called initially
 async function initialize() {
-    const user = await oidc.manager.getUser()
+    const user = await manager.getUser()
     if (!user || user.expired) {
-        log("Not logged in")
+        logDebug("Not logged in")
         if (!user)
-            log("No user")
+            logDebug("No user")
         else
-            log(`User expired=${user.expired}`)
+            logDebug(`User expired=${user.expired}`)
         return null
     }
     else {
@@ -85,9 +85,9 @@ function signOut() {
     logDebug("sign out of digilean")
     manager.signoutRedirect()
 }
-
+const logPrefix = "oidcLogin::"
 function logDebug(msg) {
-    console.debug(`${logPrefix} ${msg}`)
+    console.log(`${logPrefix} ${msg}`)
 }
 
 

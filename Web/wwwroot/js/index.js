@@ -13,6 +13,7 @@ let userData = document.querySelector("#user")
 
 
 let idServer = "https://localhost:6001"
+setupOidc()
 
 btnLoginClient.addEventListener("click", async () => {
     let client = inputUser.value

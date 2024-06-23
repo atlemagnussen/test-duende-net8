@@ -32,7 +32,10 @@ public class SeedData
             context.SaveChanges();
         else
         {
-            Log.Debug("Clients already populated");
+            Log.Error("Add web client");
+            context.Clients.Add(Config.WebClient);
+            context.SaveChanges();
+            Log.Debug("Add web client");
         }
 
         if (!context.IdentityResources.Any())

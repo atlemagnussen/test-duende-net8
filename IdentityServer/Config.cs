@@ -28,11 +28,40 @@ public static class Config
         new ApiScope(name: "api1", displayName: "My API")
     ];
 
+    public static Client WebClient => new Client
+        {
+            ClientId = "webClient",
+            ClientName = "Web Oidc client",
+            RequireClientSecret = false,
+            RequireConsent = false,
+            AllowAccessTokensViaBrowser = true,
+            AllowedGrantTypes = GrantTypes.Code,
+            RequirePkce = true,
+            EnableLocalLogin = true,
+
+            AllowedCorsOrigins = ["http://localhost:5000"],
+            RedirectUris = [ "http://localhost:5000/callback.html" ],
+            FrontChannelLogoutUri = "http://localhost:5000/signout-oidc",
+            PostLogoutRedirectUris = [ "http://localhost:5000/signout-callback-oidc" ],
+
+            AccessTokenLifetime = 3600,
+            AllowOfflineAccess = true,
+            AuthorizationCodeLifetime = 300,
+            AccessTokenType = AccessTokenType.Jwt,
+            AllowedScopes = [
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+                "roles",
+                "api1"
+            ]
+        };
     public static IEnumerable<Client> Clients =>
     [
         new Client
         {
             ClientId = "apiClient",
+            ClientName = "API Client",
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             ClientSecrets =
             {
@@ -40,32 +69,6 @@ public static class Config
             },
             AllowedScopes = { "api1" }
         },
-        new Client
-            {
-                ClientId = "webClient",
-                RequireClientSecret = false,
-                RequireConsent = false,
-                AllowAccessTokensViaBrowser = true,
-                AllowedGrantTypes = GrantTypes.Code,
-                RequirePkce = true,
-                EnableLocalLogin = true,
-
-                AllowedCorsOrigins = ["http://localhost:5000/callback.html"],
-                RedirectUris = [ "http://localhost:5000/signin-oidc" ],
-                FrontChannelLogoutUri = "http://localhost:5000/signout-oidc",
-                PostLogoutRedirectUris = [ "http://localhost:5000/signout-callback-oidc" ],
-
-                AccessTokenLifetime = 3600,
-                AllowOfflineAccess = true,
-                AuthorizationCodeLifetime = 300,
-                AccessTokenType = AccessTokenType.Jwt,
-                AllowedScopes = [
-                    IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile,
-                    IdentityServerConstants.StandardScopes.Email,
-                    "roles",
-                    "api1"
-                ]
-            },
+        WebClient
     ];
 }

@@ -34,6 +34,8 @@ public class SeedData
             else
             {
                 Log.Debug("Clients already populated");
+                // context.Clients.Add(Config.WebClient.ToEntity());
+                // context.SaveChanges();
             }
 
             if (!context.IdentityResources.Any())
