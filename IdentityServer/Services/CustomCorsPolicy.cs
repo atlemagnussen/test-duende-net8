@@ -12,7 +12,7 @@ namespace TestDuende.IdentityServer.Services
         public Task<bool> IsOriginAllowedAsync(string origin)
         {
             var uri = new Uri(origin);
-            _logger.LogDebug($"uri.Host={uri.Host}");
+            _logger.LogInformation($"uri.Host={uri.Host}");
 
             if (uri.Host.EndsWith("localhost", StringComparison.OrdinalIgnoreCase))
                 return Task.FromResult(true);

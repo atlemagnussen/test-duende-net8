@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 
 const string authServerUrl = "https://localhost:6001";
@@ -31,7 +33,11 @@ services.AddAuthentication(options =>
         ValidIssuers = [authServerUrl],
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateIssuerSigningKey = false
+        ValidateIssuerSigningKey = false,
+        ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
+                 $"{authServerUrl}/.well-known/openid-configuration",
+                 new OpenIdConnectConfigurationRetriever(),
+                 new HttpDocumentRetriever() { RequireHttps = false})
     };
 });
 

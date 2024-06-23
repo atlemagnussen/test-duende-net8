@@ -1,8 +1,8 @@
 using Duende.IdentityServer.Stores;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 using TestDuende.IdentityServer.Data;
 using TestDuende.IdentityServer.Models;
 using TestDuende.IdentityServer.Services;
@@ -11,6 +11,17 @@ namespace TestDuende.IdentityServer;
 
 internal static class HostingExtensions
 {
+    public static void AddCommonDataProtection(this WebApplicationBuilder builder)
+    {
+        var authConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+        builder.Services.AddDbContext<DataProtectionDbContext>(options =>
+            options.UseSqlServer(authConnectionString));
+
+        builder.Services.AddDataProtection()
+            .PersistKeysToDbContext<DataProtectionDbContext>()
+            .SetApplicationName("digiLean");
+    }
     public static void ConfigureIdentityServer(this WebApplicationBuilder builder)
     {
         var services = builder.Services;
@@ -97,7 +108,7 @@ internal static class HostingExtensions
     
     public static WebApplication ConfigurePipeline(this WebApplication app)
     { 
-        app.UseSerilogRequestLogging();
+        // app.UseSerilogRequestLogging();
     
         if (app.Environment.IsDevelopment())
         {
