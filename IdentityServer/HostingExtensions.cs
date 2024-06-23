@@ -73,13 +73,13 @@ internal static class HostingExtensions
 
         services.AddAuthorization(options =>
                 options.AddPolicy("admin",
-                    policy => policy.RequireClaim("sub", "1"))
+                    policy => policy.RequireClaim("sub", "76cb1c18-0d6a-4ef6-ae44-c592c67677c8"))
             );
 
         services.Configure<RazorPagesOptions>(options =>
             options.Conventions.AuthorizeFolder("/Admin", "admin"));
 
-        //builder.Services.AddTransient<IdentityServer.Ef.Pages.Portal.ClientRepository>();
+        //builder.Services.AddTransient<TestDuende.IdentityServer.Pages.Portal.ClientRepository>();
         services.AddTransient<ClientRepository>();
         services.AddTransient<IdentityScopeRepository>();
         services.AddTransient<ApiScopeRepository>();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace IdentityServer.Ef.Migrations.PersistedGrantDb
+namespace TestDuende.IdentityServer.Migrations.PersistedGrantDb
 {
     /// <inheritdoc />
     public partial class Grants : Migration
