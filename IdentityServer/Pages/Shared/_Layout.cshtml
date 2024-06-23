@@ -9,21 +9,24 @@
     
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
-    
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" />
+    <link rel="stylesheet" href="~/css/vars.css" />
+    <link rel="stylesheet" href="~/css/layout.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <partial name="_Nav" />
-   
-    <div class="container body-container">
-        @RenderBody()
+    <div class="layout">
+        <header>
+            <a href="~/">
+                <img src="~/duende-logo.svg" class="icon-banner">
+                Duende IdentityServer
+            </a>
+        </header>
+        <main>
+            <section class="centered-content">
+                @RenderBody()
+            </section>
+        </main>
+        <footer>footer</footer>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>

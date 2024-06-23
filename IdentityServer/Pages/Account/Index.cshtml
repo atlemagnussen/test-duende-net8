@@ -1,0 +1,30 @@
+@page
+@model TestDuende.IdentityServer.Pages.Account.Index
+
+<section class="login-page">
+    <div >
+        <h1>Account</h1>
+    </div>
+
+    <div class="row">
+
+        @if (Model.View.IsLoggedIn)
+        {
+            <h2>Is Logged In:</h2>
+            <p>@Model.View.UserName</p>
+            <ul>
+            @foreach (var claim in Model.View.Claims) {
+                <li>@claim.Key = @claim.Value</li>
+            }
+            </ul>
+            <div>
+                <a asp-page="/Account/Logout/Index">Log out</a>
+            </div>
+        } else {
+            <div>
+                <a asp-page="/Account/Login/Index" asp-route-returnurl="/Account">Log in</a>
+            </div>
+
+        }
+    </div>
+</div>
