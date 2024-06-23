@@ -30,7 +30,7 @@ public static class Config
 
     public static Client WebClient => new Client
         {
-            ClientId = "webClient",
+            ClientId = "webclient",
             ClientName = "Web Oidc client",
             RequireClientSecret = false,
             RequireConsent = false,

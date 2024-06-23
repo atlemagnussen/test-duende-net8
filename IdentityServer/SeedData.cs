@@ -49,7 +49,7 @@ public class SeedData
             }
             else
             {
-                Log.Debug("IdentityResources already populated");
+                Log.Debug("IdentityResources already populated, add");
             }
 
             if (!context.ApiScopes.Any())

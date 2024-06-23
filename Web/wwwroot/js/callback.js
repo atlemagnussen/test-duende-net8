@@ -32,7 +32,6 @@ async function callbackFromLogin() {
         const errorHtml = `<div class="error">
             <h2>Error occured while logging in</h2>
             <p class="msg"><i>${message}</i></p>
-            <p>Please contact <a href="mailto:contact@digilean.com">DigiLEAN support</a> if this problem persists</p>
             <p><a href="${window.location.origin}">Try to log in again</a></p>
             </div>`
         if (errorMessage)

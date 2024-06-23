@@ -2,11 +2,11 @@
 const rootPath = window.location.origin
 let oicdConfig = {
     authority: "https://localhost:6001",
-    client_id: "webClient",
+    client_id: "webclient",
     redirect_uri: `${rootPath}/callback.html`,
     response_mode: "query",
     response_type: "code",
-    scope:"openid profile",
+    scope:"openid profile api1",
     loadUserInfo: true,
     post_logout_redirect_uri: rootPath,
     userStore: new oidc.WebStorageStateStore({ store: window.sessionStorage }),
