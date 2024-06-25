@@ -46,57 +46,57 @@ CREATE TABLE [ApiScopes] (
 GO
 
 CREATE TABLE [Clients] (
-    [Id] int NOT NULL IDENTITY,
-    [Enabled] bit NOT NULL,
-    [ClientId] nvarchar(200) NOT NULL,
-    [ProtocolType] nvarchar(200) NOT NULL,
-    [RequireClientSecret] bit NOT NULL,
-    [ClientName] nvarchar(200) NULL,
-    [Description] nvarchar(1000) NULL,
-    [ClientUri] nvarchar(2000) NULL,
-    [LogoUri] nvarchar(2000) NULL,
-    [RequireConsent] bit NOT NULL,
-    [AllowRememberConsent] bit NOT NULL,
-    [AlwaysIncludeUserClaimsInIdToken] bit NOT NULL,
-    [RequirePkce] bit NOT NULL,
-    [AllowPlainTextPkce] bit NOT NULL,
-    [RequireRequestObject] bit NOT NULL,
-    [AllowAccessTokensViaBrowser] bit NOT NULL,
+    [Id] int NOT NULL IDENTITY,--ok
+    [Enabled] bit NOT NULL,--ok
+    [ClientId] nvarchar(200) NOT NULL,--ok
+    [ProtocolType] nvarchar(200) NOT NULL,--ok
+    [RequireClientSecret] bit NOT NULL,--ok
+    [ClientName] nvarchar(200) NULL,--ok
+    [Description] nvarchar(1000) NULL,--ok
+    [ClientUri] nvarchar(2000) NULL,--ok
+    [LogoUri] nvarchar(2000) NULL,--ok
+    [RequireConsent] bit NOT NULL,--ok
+    [AllowRememberConsent] bit NOT NULL,--ok
+    [AlwaysIncludeUserClaimsInIdToken] bit NOT NULL,--ok
+    [RequirePkce] bit NOT NULL,--ok
+    [AllowPlainTextPkce] bit NOT NULL,--ok
+    [RequireRequestObject] bit NOT NULL,--ok
+    [AllowAccessTokensViaBrowser] bit NOT NULL,--ok
     [RequireDPoP] bit NOT NULL,
     [DPoPValidationMode] int NOT NULL,
     [DPoPClockSkew] time NOT NULL,
-    [FrontChannelLogoutUri] nvarchar(2000) NULL,
-    [FrontChannelLogoutSessionRequired] bit NOT NULL,
-    [BackChannelLogoutUri] nvarchar(2000) NULL,
-    [BackChannelLogoutSessionRequired] bit NOT NULL,
-    [AllowOfflineAccess] bit NOT NULL,
-    [IdentityTokenLifetime] int NOT NULL,
-    [AllowedIdentityTokenSigningAlgorithms] nvarchar(100) NULL,
-    [AccessTokenLifetime] int NOT NULL,
-    [AuthorizationCodeLifetime] int NOT NULL,
-    [ConsentLifetime] int NULL,
-    [AbsoluteRefreshTokenLifetime] int NOT NULL,
-    [SlidingRefreshTokenLifetime] int NOT NULL,
-    [RefreshTokenUsage] int NOT NULL,
-    [UpdateAccessTokenClaimsOnRefresh] bit NOT NULL,
-    [RefreshTokenExpiration] int NOT NULL,
-    [AccessTokenType] int NOT NULL,
-    [EnableLocalLogin] bit NOT NULL,
-    [IncludeJwtId] bit NOT NULL,
-    [AlwaysSendClientClaims] bit NOT NULL,
-    [ClientClaimsPrefix] nvarchar(200) NULL,
-    [PairWiseSubjectSalt] nvarchar(200) NULL,
+    [FrontChannelLogoutUri] nvarchar(2000) NULL,--ok
+    [FrontChannelLogoutSessionRequired] bit NOT NULL,--ok
+    [BackChannelLogoutUri] nvarchar(2000) NULL,--ok
+    [BackChannelLogoutSessionRequired] bit NOT NULL,--ok
+    [AllowOfflineAccess] bit NOT NULL,--ok
+    [IdentityTokenLifetime] int NOT NULL,--ok
+    [AllowedIdentityTokenSigningAlgorithms] nvarchar(100) NULL,--ok
+    [AccessTokenLifetime] int NOT NULL,--ok
+    [AuthorizationCodeLifetime] int NOT NULL,--ok
+    [ConsentLifetime] int NULL,--ok
+    [AbsoluteRefreshTokenLifetime] int NOT NULL,--ok
+    [SlidingRefreshTokenLifetime] int NOT NULL,--ok
+    [RefreshTokenUsage] int NOT NULL,--ok
+    [UpdateAccessTokenClaimsOnRefresh] bit NOT NULL,--ok
+    [RefreshTokenExpiration] int NOT NULL,--ok
+    [AccessTokenType] int NOT NULL,--ok
+    [EnableLocalLogin] bit NOT NULL,--ok
+    [IncludeJwtId] bit NOT NULL,--ok
+    [AlwaysSendClientClaims] bit NOT NULL,--ok
+    [ClientClaimsPrefix] nvarchar(200) NULL,--ok
+    [PairWiseSubjectSalt] nvarchar(200) NULL,--ok
     [InitiateLoginUri] nvarchar(2000) NULL,
-    [UserSsoLifetime] int NULL,
-    [UserCodeType] nvarchar(100) NULL,
-    [DeviceCodeLifetime] int NOT NULL,
+    [UserSsoLifetime] int NULL,--ok
+    [UserCodeType] nvarchar(100) NULL,--ok
+    [DeviceCodeLifetime] int NOT NULL,--ok
     [CibaLifetime] int NULL,
     [PollingInterval] int NULL,
     [CoordinateLifetimeWithUserSession] bit NULL,
-    [Created] datetime2 NOT NULL,
-    [Updated] datetime2 NULL,
-    [LastAccessed] datetime2 NULL,
-    [NonEditable] bit NOT NULL,
+    [Created] datetime2 NOT NULL,--ok
+    [Updated] datetime2 NULL,--ok
+    [LastAccessed] datetime2 NULL,--ok
+    [NonEditable] bit NOT NULL,--ok
     [PushedAuthorizationLifetime] int NULL,
     [RequirePushedAuthorization] bit NOT NULL,
     CONSTRAINT [PK_Clients] PRIMARY KEY ([Id])
